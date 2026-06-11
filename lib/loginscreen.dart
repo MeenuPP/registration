@@ -5,9 +5,11 @@ import 'package:registration/signup.dart';
 
 class Loginscreen extends StatelessWidget {
   const Loginscreen({super.key});
-
+ 
   @override
   Widget build(BuildContext context) {
+TextEditingController emailc=TextEditingController();
+TextEditingController passc=TextEditingController();
     return Scaffold(
       body: Center(
         child: Padding(
@@ -30,32 +32,44 @@ class Loginscreen extends StatelessWidget {
                   style: TextStyle(color: Colors.blueGrey),
                 ),
                 SizedBox(height: 20),
-                TextField(
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text("Email", style: TextStyle(fontSize: 15)),
+                ),
+                TextField(controller: emailc,
                   decoration: InputDecoration(
-                    labelText: "Email",
+                    hintText: "Email",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
-                TextField(
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text("Password", style: TextStyle(fontSize: 15)),
+                ),
+                TextField(controller: passc,
                   decoration: InputDecoration(
-                    labelText: "Password",
+                    hintText: "Password",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                ),SizedBox(height: 20,),GestureDetector(onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Forgot(),));
-                },
+                ),
+                SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const Forgot(),));
+                  },
                   child: Align(
                     alignment: Alignment.bottomRight,
-                    child: Text("Forgot password")),
+                    child: Text("Forgot password"),
+                  ),
                 ),
                 SizedBox(height: 20),
                 SizedBox(
-                  width: 100,
+                  width: 300,
                   height: 55,
                   child: ElevatedButton(
                     onPressed: () {},
@@ -63,7 +77,7 @@ class Loginscreen extends StatelessWidget {
                       backgroundColor: Colors.blue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100),
-                      ),minimumSize: Size(300, 60)
+                      ),
                     ),
                     child: Text(
                       "Login",
@@ -76,22 +90,34 @@ class Loginscreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                Row(mainAxisAlignment: .center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Don't have an acccount?",
+                      "Don't have an account?",
                       style: TextStyle(color: Colors.black),
                     ),
+                    SizedBox(width: 5),
                     GestureDetector(
-                      onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context) => Signup(),));},
-                      child: Text("Sign up",
-                      style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,),),
-                    )
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const Signup()));
+                      },
+                      child: Text(
+                        "Sign up",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ],
-                ),SizedBox(
-                  height: 300,width: double.infinity,
-                  
-                  child: Lottie.asset("assets/splash.json",))
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  height: 300,
+                  width: double.infinity,
+                  child: Lottie.asset("assets/splash.json"),
+                ),
                   
               ],
             ),

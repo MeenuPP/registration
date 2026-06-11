@@ -36,6 +36,7 @@ class Welcome extends StatelessWidget {
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.white,
+                    
                     side: BorderSide(color: Colors.black),
                   ),
                   child: Text("Login",style: TextStyle(color: Colors.black),),

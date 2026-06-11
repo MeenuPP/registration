@@ -6,11 +6,16 @@ class Signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController emailc=TextEditingController();
+TextEditingController passc=TextEditingController();
+TextEditingController confpassc=TextEditingController();
+TextEditingController userc=TextEditingController();
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.only(left: 200,right: 200),
-          child: Column(
+          padding: const EdgeInsets.only(left: 200, right: 200),
+          child: SingleChildScrollView(
+            child: Column(
             children: [
               SizedBox(height: 70),
               Text(
@@ -22,38 +27,57 @@ class Signup extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40),
-              Text("Create an account,it's free", style: TextStyle(fontSize: 20)),
+              Text(
+                "Create an account,it's free",
+                style: TextStyle(fontSize: 20),
+              ),
               SizedBox(height: 40),
-              TextField(
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text("Username", style: TextStyle(fontSize: 15)),
+              ),
+              TextField(controller: userc,
                 decoration: InputDecoration(
-                  labelText: "Username",
+                  hintText: "Username",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
               SizedBox(height: 40),
-              TextField(
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text("Email", style: TextStyle(fontSize: 15)),
+              ),
+              TextField(controller: emailc,
                 decoration: InputDecoration(
-                  labelText: "Email",
+                  hintText: "Email",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
               SizedBox(height: 40),
-              TextField(
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text("Password", style: TextStyle(fontSize: 15)),
+              ),
+              TextField(controller: passc,
                 decoration: InputDecoration(
-                  labelText: "Password",
+                  hintText: "Password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
               ),
               SizedBox(height: 40),
-              TextField(
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text("Confirm Password", style: TextStyle(fontSize: 15)),
+              ),
+              TextField(controller: confpassc,
                 decoration: InputDecoration(
-                  labelText: "Confirm Password",
+                  hintText: "Confirm Password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -70,7 +94,6 @@ class Signup extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    
                   ),
                   child: Text(
                     "Sign up",
@@ -83,16 +106,20 @@ class Signup extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 40),
-              Row(mainAxisAlignment: MainAxisAlignment.center,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "Already have an account?",
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
-          
+
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Loginscreen(),));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Loginscreen()),
+                      );
                     },
                     child: Text(
                       "Login",
@@ -109,6 +136,7 @@ class Signup extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
