@@ -4,18 +4,28 @@ import 'package:registration/forgot.dart';
 import 'package:registration/service.dart';
 import 'package:registration/signup.dart';
 
-class Loginscreen extends StatelessWidget {
-   Loginscreen({super.key});
+class Loginscreen extends StatefulWidget {
+  Loginscreen({super.key});
 
-  TextEditingController emailc=TextEditingController();
-TextEditingController passc=TextEditingController();
- final formkey=GlobalKey<FormState>();
+  @override
+  State<Loginscreen> createState() => _LoginscreenState();
+}
+
+class _LoginscreenState extends State<Loginscreen> {
+  TextEditingController emailc = TextEditingController();
+
+  TextEditingController passc = TextEditingController();
+
+  final formkey = GlobalKey<FormState>();
+
+  bool isvisible = true;
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Center(
-        child: Form(key:formkey,
+        child: Form(
+          key: formkey,
           child: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: SingleChildScrollView(
@@ -42,15 +52,15 @@ TextEditingController passc=TextEditingController();
                   ),
                   TextFormField(
                     validator: (value) {
-                  if(value==null||value.isEmpty){
-                    return "Email is required";
-        
-                  }if(!(value.contains("@")&&value.contains("."))){
-                    return "Enter a valid email";
-                  }
-                  return null;
-                  
-                },controller: emailc,
+                      if (value == null || value.isEmpty) {
+                        return "Email is required";
+                      }
+                      if (!(value.contains("@") && value.contains("."))) {
+                        return "Enter a valid email";
+                      }
+                      return null;
+                    },
+                    controller: emailc,
                     decoration: InputDecoration(
                       hintText: "Email",
                       border: OutlineInputBorder(
@@ -63,16 +73,29 @@ TextEditingController passc=TextEditingController();
                     alignment: Alignment.topLeft,
                     child: Text("Password", style: TextStyle(fontSize: 15)),
                   ),
-                  TextFormField(validator: (value) {
-                  if(value==null||value.isEmpty){
-                    return "Password is required";}
-                    
-                    if(value.length!=8){
-                      return "Password must be 8 characters";
-                    }
+                  TextFormField(
+                    obscureText: isvisible,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Password is required";
+                      }
+
+                      if (value.length != 8) {
+                        return "Password must be 8 characters";
+                      }
                     },
                     controller: passc,
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isvisible = !isvisible;
+                          });
+                        },
+                        icon: isvisible
+                            ? Icon(Icons.visibility_off)
+                            : Icon(Icons.visibility),
+                      ),
                       hintText: "Password",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -82,7 +105,10 @@ TextEditingController passc=TextEditingController();
                   SizedBox(height: 20),
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>  Forgot(),));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Forgot()),
+                      );
                     },
                     child: Align(
                       alignment: Alignment.bottomRight,
@@ -97,7 +123,6 @@ TextEditingController passc=TextEditingController();
                       onPressed: () {
                         if (formkey.currentState!.validate()) {
                           login(emailc.text, passc.text, context);
-                          
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -127,7 +152,10 @@ TextEditingController passc=TextEditingController();
                       SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) =>  Signup()));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Signup()),
+                          );
                         },
                         child: Text(
                           "Sign up",
@@ -145,7 +173,6 @@ TextEditingController passc=TextEditingController();
                     width: double.infinity,
                     child: Lottie.asset("assets/splash.json"),
                   ),
-                    
                 ],
               ),
             ),
