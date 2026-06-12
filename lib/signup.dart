@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:registration/loginscreen.dart';
+import 'package:registration/service.dart';
 
 class Signup extends StatelessWidget {
    Signup({super.key});
@@ -15,7 +16,7 @@ final formkey=GlobalKey<FormState>();
       body: Center(
         child: Form(key:formkey,
           child: Padding(
-            padding: const EdgeInsets.only(left: 200, right: 200),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: SingleChildScrollView(
               child: Column(
               children: [
@@ -125,7 +126,7 @@ final formkey=GlobalKey<FormState>();
                   child: ElevatedButton(
                     onPressed: () {
                       if (formkey.currentState!.validate()) {
-                          print("Login");
+                          register(userc.text, emailc.text, passc.text, context);
                       }
                     },
                     style: ElevatedButton.styleFrom(

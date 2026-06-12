@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:registration/loginscreen.dart';
+import 'package:registration/service.dart';
 
 class Forgot extends StatelessWidget {
    Forgot({super.key});
  final  formkey=GlobalKey<FormState>();
+ TextEditingController emailc=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Form(key:formkey,
         child: Padding(
-          padding: const EdgeInsets.only(left: 200, right: 200),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: Center(
             child: Column(
               children: [
@@ -27,7 +29,9 @@ class Forgot extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-                TextFormField(validator: (value) {
+                TextFormField(
+                  controller: emailc,
+                  validator: (value) {
                   if(value==null||value.isEmpty){
                     return "Email is required";
         
@@ -47,7 +51,9 @@ class Forgot extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(onPressed: () {},style: ElevatedButton.styleFrom(backgroundColor: Colors.blue,side: BorderSide(color: Colors.black),minimumSize:Size(300,60)) , child: Text("recovery link",)),
+                ElevatedButton(onPressed: () {
+                  forgot(emailc.text, context);
+                },style: ElevatedButton.styleFrom(backgroundColor: Colors.blue,side: BorderSide(color: Colors.black),minimumSize:Size(300,60)) , child: Text("recovery link",)),
                 SizedBox(height: 20),
                 GestureDetector(
                   onTap: () {
